@@ -71,11 +71,20 @@ function ESX.Progressbar(message, length, Options)
 end
 
 function ESX.ShowNotification(message, type, length)
-    if GetResourceState("esx_notify") ~= "missing" then
-        return exports["esx_notify"]:Notify(type, length, message)
+    if type == nil then
+        type = "inform"
     end
-
-    print("[^1ERROR^7] ^5ESX Notify^7 is Missing!")
+    message = message:gsub("~r~", "")
+    message = message:gsub("~g~", "")
+    message = message:gsub("~y~", "")
+    message = message:gsub("~b~", "")
+    message = message:gsub("~s~", "")
+    message = message:gsub("~w~", "")
+    lib.notify({
+        -- title = 'Notification title',
+        description = message,
+        type = type
+    })
 end
 
 function ESX.TextUI(message, type)
