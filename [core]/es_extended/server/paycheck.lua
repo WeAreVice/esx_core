@@ -5,7 +5,7 @@ function StartPayCheck()
       for player, xPlayer in pairs(ESX.Players) do
         local jobLabel = xPlayer.job.label
         local job = xPlayer.job.grade_name
-        local salary = xPlayer.job.grade_salary
+        local salary = math.floor(xPlayer.job.grade_salary / 8)
 
         if salary > 0 then
           if job == 'unemployed' then -- unemployed
