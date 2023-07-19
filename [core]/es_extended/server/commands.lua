@@ -94,8 +94,8 @@ ESX.RegisterCommand('car', 'admin', function(xPlayer, args, showError)
 			if GetVehiclePedIsIn(playerPed, false) ~= vehicle then
 				showError('[^1ERROR^7] The player could not be seated in the vehicle')
             else
-                TriggerServerEvent("ceeb_vehiclekey:setVehicleOpen", networkId, true)
-                TriggerServerEvent('ceeb_vehiclekey:giveTemporaryKey', GetVehicleNumberPlateText(vehicle))
+                TriggerEvent("ceeb_vehiclekey:setVehicleOpen", networkId, true)
+                TriggerEvent('ceeb_vehiclekey:giveTemporaryKey', GetVehicleNumberPlateText(vehicle))
 			end
 		end
 	end)
