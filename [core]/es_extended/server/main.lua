@@ -32,20 +32,19 @@ if Config.Multichar then
 	end)
 else
 	RegisterNetEvent('esx:onPlayerJoined')
-	AddEventHandler('esx:onPlayerJoined', function()
+	AddEventHandler('esx:onPlayerJoined', function(identifier)
 		local _source = source
 		while not next(ESX.Jobs) do
 			Wait(50)
 		end
 
 		if not ESX.Players[_source] then
-			onPlayerJoined(_source)
+			onPlayerJoined(_source, identifier)
 		end
 	end)
 end
 
-function onPlayerJoined(playerId)
-	local identifier = ESX.GetIdentifier(playerId)
+function onPlayerJoined(playerId, identifier)
 	if identifier then
 		if ESX.GetPlayerFromIdentifier(identifier) then
 			DropPlayer(playerId,

@@ -20,8 +20,7 @@ function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, 
 	self.weight = weight
 	self.maxWeight = Config.MaxWeight
 	self.metadata = metadata
-	if Config.Multichar then self.license = 'license' .. identifier:sub(identifier:find(':'), identifier:len()) else self.license = 'license:' .. identifier end
-
+	if Config.Multichar then self.license = 'license' .. identifier:sub(identifier:find(':'), identifier:len()) else self.license = 'discord' .. identifier:sub(identifier:find(':'), identifier:len()) end
 	ExecuteCommand(('add_principal identifier.%s group.%s'):format(self.license, self.group))
 
 	local stateBag = Player(self.source).state
