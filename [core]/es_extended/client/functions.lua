@@ -397,7 +397,7 @@ end
 
 function ESX.Game.DeleteVehicle(vehicle)
     SetEntityAsMissionEntity(vehicle, true, true)
-    DeleteVehicle(vehicle)
+    exports["AdvancedParking"]:DeleteVehicle(vehicle)
 end
 
 function ESX.Game.DeleteObject(object)
