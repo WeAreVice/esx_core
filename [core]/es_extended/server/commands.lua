@@ -46,7 +46,6 @@ end, true, {
 
 local upgrades = Config.SpawnVehMaxUpgrades and
 	{
-		plate = "ADMINCAR",
 		modEngine = 3,
 		modBrakes = 2,
 		modTransmission = 2,
