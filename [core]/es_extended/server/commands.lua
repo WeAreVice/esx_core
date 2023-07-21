@@ -110,14 +110,21 @@ end, false, {
 ESX.RegisterCommand({ 'cardel', 'dv' }, 'admin', function(xPlayer, args)
 	local PedVehicle = GetVehiclePedIsIn(GetPlayerPed(xPlayer.source), false)
 	if DoesEntityExist(PedVehicle) then
-		DeleteEntity(PedVehicle)
+        local networkId = NetworkGetNetworkIdFromEntity(PedVehicle)
+        local isRegistered = exports.ceeb_vehiclepersistance:isRegistered(networkId)
+        if not isRegistered then 
+            DeleteEntity(PedVehicle)
+        end
 	end
 	local Vehicles = ESX.OneSync.GetVehiclesInArea(GetEntityCoords(GetPlayerPed(xPlayer.source)),
 		tonumber(args.radius) or 5.0)
 	for i = 1, #Vehicles do
 		local Vehicle = NetworkGetEntityFromNetworkId(Vehicles[i])
 		if DoesEntityExist(Vehicle) then
-			DeleteEntity(Vehicle)
+            local isRegistered = exports.ceeb_vehiclepersistance:isRegistered(Vehicles[i])
+            if not isRegistered then
+                DeleteEntity(Vehicle)
+            end
 		end
 	end
 	if Config.AdminLogging then

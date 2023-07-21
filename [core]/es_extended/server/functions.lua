@@ -186,6 +186,7 @@ function Core.SavePlayer(xPlayer, cb)
 end
 
 function Core.SavePlayers(cb)
+    TriggerEvent("esx:syncDb")
 	local xPlayers <const> = ESX.Players
 	if not next(xPlayers) then
 		return

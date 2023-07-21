@@ -397,7 +397,8 @@ end
 
 function ESX.Game.DeleteVehicle(vehicle)
     SetEntityAsMissionEntity(vehicle, true, true)
-    exports["AdvancedParking"]:DeleteVehicle(vehicle)
+    TriggerServerEvent("ceeb_vehiclepersistance:destroy", NetworkGetNetworkIdFromEntity(vehicle))
+    DeleteEntity(vehicle)
 end
 
 function ESX.Game.DeleteObject(object)
