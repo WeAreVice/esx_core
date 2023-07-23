@@ -652,7 +652,7 @@ function ESX.Game.GetVehicleProperties(vehicle)
     end
 
     for windowId = 0, 7 do              -- 13
-        RollUpWindow(vehicle, windowId) --fix when you put the car away with the window down
+        -- RollUpWindow(vehicle, windowId) --fix when you put the car away with the window down
         windowsBroken[tostring(windowId)] = not IsVehicleWindowIntact(vehicle, windowId)
     end
 
