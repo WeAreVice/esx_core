@@ -92,7 +92,7 @@ AddEventHandler('esx:playerLoaded', function(xPlayer, isNew, skin)
                     DisablePlayerVehicleRewards(playerId)
                 end
 
-                if Config.RemoveHudCommonents[14] then
+                if Config.RemoveHudComponents[14] then
                     HideHudComponentThisFrame(14)
                 end
 
