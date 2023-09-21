@@ -19,9 +19,9 @@ AddEventHandler('esx:playerLoaded', function(xPlayer, isNew, skin)
         TriggerEvent('esx:restoreLoadout')
 
         if isNew then
-            TriggerEvent('skinchanger:loadDefaultModel', skin.sex == 0)
+            TriggerEvent('ceeb_skin:loadDefaultModel', skin.pedModel)
         elseif skin then
-            TriggerEvent('skinchanger:loadSkin', skin)
+            TriggerEvent('ceeb_skin:loadSkin', skin)
         end
     end
 
@@ -51,12 +51,12 @@ AddEventHandler('esx:playerLoaded', function(xPlayer, isNew, skin)
         end
     end
 
-    if Config.DisableVehicleSeatShuff then
-        AddEventHandler('esx:enteredVehicle', function(vehicle, _, seat)
-            SetPedIntoVehicle(ESX.PlayerData.ped, vehicle, seat)
-            SetPedConfigFlag(ESX.PlayerData.ped, 184, true)
-        end)
-    end
+    -- if Config.DisableVehicleSeatShuff then
+    --     AddEventHandler('esx:enteredVehicle', function(vehicle, _, seat)
+    --         SetPedIntoVehicle(ESX.PlayerData.ped, vehicle, seat)
+    --         SetPedConfigFlag(ESX.PlayerData.ped, 184, true)
+    --     end)
+    -- end
 
     if Config.DisableHealthRegeneration or Config.DisableWeaponWheel or Config.DisableAimAssist or Config.DisableVehicleRewards then
         CreateThread(function()
@@ -182,7 +182,7 @@ AddEventHandler('esx:onPlayerDeath', function()
     ESX.SetPlayerData('dead', true)
 end)
 
-AddEventHandler('skinchanger:modelLoaded', function()
+AddEventHandler('ceeb_skin:modelLoaded', function()
     while not ESX.PlayerLoaded do
         Wait(100)
     end

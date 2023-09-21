@@ -94,9 +94,9 @@ ESX.RegisterCommand('car', 'admin', function(xPlayer, args, showError)
             if GetVehiclePedIsIn(playerPed, false) ~= vehicle then
                 showError('[^1ERROR^7] The player could not be seated in the vehicle')
             else
-                TriggerEvent("ceeb_vehiclekey:setVehicleOpen", networkId, true)
+                TriggerEvent("ceeb_vehicle:setOpen", networkId, true)
                 Wait(1000)
-                TriggerEvent("ceeb_vehiclekey:giveTemporaryKeyServer", xPlayer.source, GetVehicleNumberPlateText(vehicle))
+                TriggerEvent("ceeb_vehicle:key:addTempFromServer", xPlayer.source, GetVehicleNumberPlateText(vehicle))
             end
         end
     end)
@@ -112,7 +112,7 @@ ESX.RegisterCommand({ 'cardel', 'dv' }, 'admin', function(xPlayer, args)
     local PedVehicle = GetVehiclePedIsIn(GetPlayerPed(xPlayer.source), false)
     if DoesEntityExist(PedVehicle) then
         local networkId = NetworkGetNetworkIdFromEntity(PedVehicle)
-        local isRegistered = exports.ceeb_vehiclepersistance:isRegistered(networkId)
+        local isRegistered = exports.ceeb_vehicle:isRegistered(networkId)
         if not isRegistered then
             DeleteEntity(PedVehicle)
         end
@@ -122,7 +122,7 @@ ESX.RegisterCommand({ 'cardel', 'dv' }, 'admin', function(xPlayer, args)
     for i = 1, #Vehicles do
         local Vehicle = NetworkGetEntityFromNetworkId(Vehicles[i])
         if DoesEntityExist(Vehicle) then
-            local isRegistered = exports.ceeb_vehiclepersistance:isRegistered(Vehicles[i])
+            local isRegistered = exports.ceeb_vehicle:isRegistered(Vehicles[i])
             if not isRegistered then
                 DeleteEntity(Vehicle)
             end
