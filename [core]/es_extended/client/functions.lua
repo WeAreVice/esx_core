@@ -74,8 +74,7 @@ function ESX.ShowNotification(message, notifyType, length)
     if GetResourceState("esx_notify") ~= "missing" then
         return exports["esx_notify"]:Notify(notifyType, length, message)
     end
-
-    print("[^1ERROR^7] ^5ESX Notify^7 is Missing!")
+    return lib.notify({ description = message, type = notifyType })
 end
 
 function ESX.TextUI(message, notifyType)
@@ -1077,8 +1076,8 @@ function ESX.ShowInventory()
 
     elements[1].title = TranslateCap('inventory', currentWeight, Config.MaxWeight)
 
-    for i=1, #Config.Weapons do
-        local v = Config.Weapons[i] 
+    for i = 1, #Config.Weapons do
+        local v = Config.Weapons[i]
         local weaponHash = joaat(v.name)
 
         if HasPedGotWeapon(playerPed, weaponHash, false) then
@@ -1097,8 +1096,8 @@ function ESX.ShowInventory()
                 canRemove = true
             }
         end
-    end 
-    
+    end
+
     ESX.CloseContext()
 
     ESX.OpenContext("right", elements, function(_, element)
@@ -1324,7 +1323,7 @@ AddEventHandler('onResourceStop', function(resourceName)
         end
     end
 end)
--- Credits to txAdmin for the list. 
+-- Credits to txAdmin for the list.
 local mismatchedTypes = {
     [`airtug`] = "automobile",       -- trailer
     [`avisa`] = "submarine",         -- boat
@@ -1365,7 +1364,7 @@ local mismatchedTypes = {
 ---@return string
 function ESX.GetVehicleType(model)
     model = type(model) == 'string' and joaat(model) or model
-    if not IsModelInCdimage(model) then return end  
+    if not IsModelInCdimage(model) then return end
     if mismatchedTypes[model] then
         return mismatchedTypes[model]
     end
