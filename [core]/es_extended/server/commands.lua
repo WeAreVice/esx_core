@@ -455,71 +455,71 @@ ESX.RegisterCommand('group', { "user", "admin" }, function(xPlayer, _, _)
 end, true)
 
 ESX.RegisterCommand('job', { "user", "admin" }, function(xPlayer, _, _)
-    print(('%s, your job is: ^5%s^0 - ^5%s^0'):format(xPlayer.getName(), xPlayer.getJob().name,
-        xPlayer.getJob().grade_label))
-end, true)
+	print(('%s, your job is: ^5%s^0 - ^5%s^0'):format(xPlayer.getName(), xPlayer.getJob().name,
+		xPlayer.getJob().grade_label))
+end, false)
 
 ESX.RegisterCommand('info', { "user", "admin" }, function(xPlayer)
-    local job = xPlayer.getJob().name
-    print(('^2ID: ^5%s^0 | ^2Name: ^5%s^0 | ^2Group: ^5%s^0 | ^2Job: ^5%s^0'):format(xPlayer.source, xPlayer.getName(),
-        xPlayer.getGroup(), job))
-end, true)
+	local job = xPlayer.getJob().name
+	print(('^2ID: ^5%s^0 | ^2Name: ^5%s^0 | ^2Group: ^5%s^0 | ^2Job: ^5%s^0'):format(xPlayer.source, xPlayer.getName(),
+		xPlayer.getGroup(), job))
+end, false)
 
 ESX.RegisterCommand('coords', "admin", function(xPlayer)
-    local ped = GetPlayerPed(xPlayer.source)
-    local coords = GetEntityCoords(ped, false)
-    local heading = GetEntityHeading(ped)
-    print(('Coords - Vector3: ^5%s^0'):format(vector3(coords.x, coords.y, coords.z)))
-    print(('Coords - Vector4: ^5%s^0'):format(vector4(coords.x, coords.y, coords.z, heading)))
-end, true)
+	local ped = GetPlayerPed(xPlayer.source)
+	local coords = GetEntityCoords(ped, false)
+	local heading = GetEntityHeading(ped)
+	print(('Coords - Vector3: ^5%s^0'):format(vector3(coords.x, coords.y, coords.z)))
+	print(('Coords - Vector4: ^5%s^0'):format(vector4(coords.x, coords.y, coords.z, heading)))
+end, false)
 
 ESX.RegisterCommand('tpm', "admin", function(xPlayer)
-    xPlayer.triggerEvent("esx:tpm")
-    if Config.AdminLogging then
-        ESX.DiscordLogFields("UserActions", "Admin Teleport /tpm Triggered!", "pink", {
-            { name = "Player", value = xPlayer and xPlayer.name or "Server Console", inline = true },
-            { name = "ID",     value = xPlayer and xPlayer.source or "Unknown ID",   inline = true },
-        })
-    end
-end, true)
+	xPlayer.triggerEvent("esx:tpm")
+	if Config.AdminLogging then
+		ESX.DiscordLogFields("UserActions", "Admin Teleport /tpm Triggered!", "pink", {
+			{ name = "Player",  value = xPlayer and xPlayer.name or "Server Console",   inline = true },
+			{ name = "ID",      value = xPlayer and xPlayer.source or "Unknown ID", inline = true },
+		})
+	end
+end, false)
 
 ESX.RegisterCommand('goto', "admin", function(xPlayer, args)
-    local targetCoords = args.playerId.getCoords()
-    xPlayer.setCoords(targetCoords)
-    if Config.AdminLogging then
-        ESX.DiscordLogFields("UserActions", "Admin Teleport /goto Triggered!", "pink", {
-            { name = "Player",        value = xPlayer and xPlayer.name or "Server Console", inline = true },
-            { name = "ID",            value = xPlayer and xPlayer.source or "Unknown ID",   inline = true },
-            { name = "Target",        value = args.playerId.name,                           inline = true },
-            { name = "Target Coords", value = targetCoords,                                 inline = true },
-        })
-    end
-end, true, {
-    help = TranslateCap('command_goto'),
-    validate = true,
-    arguments = {
-        { name = 'playerId', help = TranslateCap('commandgeneric_playerid'), type = 'player' }
-    }
+	local targetCoords = args.playerId.getCoords()
+	xPlayer.setCoords(targetCoords)
+	if Config.AdminLogging then
+		ESX.DiscordLogFields("UserActions", "Admin Teleport /goto Triggered!", "pink", {
+			{ name = "Player",  value = xPlayer and xPlayer.name or "Server Console",   inline = true },
+			{ name = "ID",      value = xPlayer and xPlayer.source or "Unknown ID", inline = true },
+			{ name = "Target",        value = args.playerId.name, inline = true },
+			{ name = "Target Coords", value = targetCoords,       inline = true },
+		})
+	end
+end, false, {
+	help = TranslateCap('command_goto'),
+	validate = true,
+	arguments = {
+		{ name = 'playerId', help = TranslateCap('commandgeneric_playerid'), type = 'player' }
+	}
 })
 
 ESX.RegisterCommand('bring', "admin", function(xPlayer, args)
-    local targetCoords = args.playerId.getCoords()
-    local playerCoords = xPlayer.getCoords()
-    args.playerId.setCoords(playerCoords)
-    if Config.AdminLogging then
-        ESX.DiscordLogFields("UserActions", "Admin Teleport /bring Triggered!", "pink", {
-            { name = "Player",        value = xPlayer and xPlayer.name or "Server Console", inline = true },
-            { name = "ID",            value = xPlayer and xPlayer.source or "Unknown ID",   inline = true },
-            { name = "Target",        value = args.playerId.name,                           inline = true },
-            { name = "Target Coords", value = targetCoords,                                 inline = true },
-        })
-    end
-end, true, {
-    help = TranslateCap('command_bring'),
-    validate = true,
-    arguments = {
-        { name = 'playerId', help = TranslateCap('commandgeneric_playerid'), type = 'player' }
-    }
+	local targetCoords = args.playerId.getCoords()
+	local playerCoords = xPlayer.getCoords()
+	args.playerId.setCoords(playerCoords)
+	if Config.AdminLogging then
+		ESX.DiscordLogFields("UserActions", "Admin Teleport /bring Triggered!", "pink", {
+			{ name = "Player",  value = xPlayer and xPlayer.name or "Server Console",   inline = true },
+			{ name = "ID",      value = xPlayer and xPlayer.source or "Unknown ID", inline = true },
+			{ name = "Target",        value = args.playerId.name, inline = true },
+			{ name = "Target Coords", value = targetCoords,       inline = true },
+		})
+	end
+end, false, {
+	help = TranslateCap('command_bring'),
+	validate = true,
+	arguments = {
+		{ name = 'playerId', help = TranslateCap('commandgeneric_playerid'), type = 'player' }
+	}
 })
 
 ESX.RegisterCommand('kill', "admin", function(xPlayer, args)
